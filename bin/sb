@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+require __DIR__.'/../vendor/autoload.php';
+
+use Symfony\Component\Console\Application;
+
+use Sb\Command;
+
+$application = new Application('sb', '1.0.0');
+
+$application->add(new Command\CreateService());
+$application->add(new Command\SelfUpdate());
+
+// $application->setDefaultCommand($command->getName(), true);
+$application->run();
+

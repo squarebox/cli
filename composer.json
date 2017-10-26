@@ -1,9 +1,37 @@
 {
+	"name": "squarebox/cli",
+	"description": "CLI tool for managing Squarebox account",
+	"license": "MIT",
     "require": {
         "symfony/process": "^3.3",
         "symfony/console": "^3.3"
     },
+    "bin": ["bin/sb"],
     "autoload": {
         "psr-4": {"": "src/"}
-    }
+    },
+    "require-dev": {
+        "macfja/phar-builder": "^0.2.6",
+		"padraic/phar-updater": "^1.0"
+    },
+    "config": {
+        "bin-dir": "scripts"
+    },
+    "scripts": {
+        "package": [
+        	"php -d phar.readonly=0 scripts/phar-builder package composer.json",
+        	"chmod +x ./sb.phar"
+        ]
+    },
+    "extra": {
+   		"phar-builder": {
+   			"compression": "GZip",
+   			"name": "sb.phar",
+   			"include": ["bin"],
+   			"output-dir": "./",
+   			"entry-point": "./bin/sb",
+   			"include-dev": false,
+   			"skip-shebang": false
+   		}
+   	}
 }
